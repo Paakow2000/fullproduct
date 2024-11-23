@@ -14,6 +14,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const port = process.env.PORT || 5000;
 
 const app = express();
 const PORT = 5000;
@@ -23,8 +24,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Atlas Connection
-const dbURI =
-  "mongodb+srv://Paakow:Father.2000@cluster0.g1ymu.mongodb.net/Products-API?retryWrites=true&w=majority&appName=Cluster0";
+const dbURI = MONGO_URL;
 mongoose
   .connect(dbURI)
   .then(() => console.log("Connected to MongoDB Atlas"))
@@ -61,7 +61,11 @@ app.post("/products", async (req, res) => {
   }
 });
 
-// Start the server
+/*   // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+});  */
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on http://0.0.0.0:${PORT}`);
 });
